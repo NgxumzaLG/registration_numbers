@@ -1,14 +1,19 @@
 function regNumberFactory(regNoData) {
     var storeRegNo = regNoData || {};
     var checkedTown = [];
+    var message = ""
 
     function addRegNo(regNumber) {
         if (regNumber !== "") {
             if (!storeRegNo[regNumber]) {
                 storeRegNo[regNumber] = 1;
+                message = "Registration number has been succcesfully added"
+                return true
 
             } else {
                 storeRegNo[regNumber]++;
+                message = "Registration number already exists"
+                return false
 
             }
         }
@@ -17,6 +22,10 @@ function regNumberFactory(regNoData) {
     function regNoAdded() {
         return storeRegNo;
 
+    }
+
+    function getMessage(){
+        return message
     }
 
     function showRegNo(regTown) {
@@ -67,7 +76,8 @@ function regNumberFactory(regNoData) {
         addRegNo,
         regNoAdded,
         showRegNo,
-        showTown
+        showTown,
+        getMessage
         
     }
 }

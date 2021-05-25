@@ -40,12 +40,28 @@ function disapendObject(myObject){
 }
 
 function disapendArray(myArray){
-    for (var i=0; i < myArray.length; i++) {
-        let newRegNo = document.createElement('plates');
+    if (myArray.length != 0) {
+        for (var i=0; i < myArray.length; i++) {
+            let newRegNo = document.createElement('plates');
+    
+            newRegNo.textContent = myArray[i];
+            finalRegField.appendChild(newRegNo);
+    
+        }
+    } else {
+        setTimeout(function() {
+            finalRegField.innerHTML = "No registration number from this town";
+            finalRegField.classList.add('error');
+            finalRegField.classList.remove('proceed');
 
-        newRegNo.textContent = myArray[i];
-        finalRegField.appendChild(newRegNo);
+        }, 0);
 
+        setTimeout(function() { 
+            finalRegField.innerHTML = "";
+            finalRegField.classList.remove('error');
+            finalRegField.classList.remove('proceed');
+
+        }, 3500);
     }
 }
 
@@ -55,11 +71,43 @@ function disapendArray(myArray){
         finalRegField.innerHTML = "";
 
         // instRegistration.setReg(regTextbox.value);
-        instRegistration.addRegNo(regTextbox.value)
+        
 
         if (regTextbox.value !== "") {
 
-            disapendObject(instRegistration.regNoAdded());
+            if (instRegistration.addRegNo(regTextbox.value)){
+                disapendObject(instRegistration.regNoAdded());
+               
+                setTimeout(function() {
+                    errorsfield.innerHTML = instRegistration.getMessage();
+                    errorsfield.classList.add('proceed');
+    
+                }, 0);
+
+                setTimeout(function() { 
+                    errorsfield.innerHTML = "";
+                    errorsfield.classList.remove('error');
+                    errorsfield.classList.remove('proceed');
+    
+                }, 3500);
+
+            } else {
+                setTimeout(function() {
+                    errorsfield.innerHTML = instRegistration.getMessage();
+                    errorsfield.classList.add('error');
+                    errorsfield.classList.remove('proceed');
+    
+                }, 0);
+
+                setTimeout(function() { 
+                    errorsfield.innerHTML = "";
+                    errorsfield.classList.remove('error');
+                    errorsfield.classList.remove('proceed');
+    
+                }, 3500);
+            }
+
+            
             // let newRegNo = document.createElement('plates');
 
             // newRegNo.textContent = instRegistration.getReg();
@@ -105,9 +153,34 @@ function disapendArray(myArray){
 
        }
 
-        instRegistration.showRegNo(strCheckedRadioTownBtn);
+       if (strCheckedRadioTownBtn !== "") {
+            instRegistration.showRegNo(strCheckedRadioTownBtn);
 
-        disapendArray(instRegistration.showTown());
+            disapendArray(instRegistration.showTown());
+
+       } else {
+            setTimeout(function() {
+                finalRegField.innerHTML = "Error! town not selected";
+                finalRegField.classList.add('error');
+
+            }, 0);
+
+            setTimeout(function() {
+                finalRegField.innerHTML = "Please select any town";
+                finalRegField.classList.remove('error');
+                finalRegField.classList.add('proceed')
+
+            }, 3000);
+
+            setTimeout(function() { 
+                finalRegField.innerHTML = "";
+                finalRegField.classList.remove('error');
+                finalRegField.classList.remove('proceed');
+
+            }, 5750);
+
+       }
+        
 
     }
 
@@ -115,8 +188,7 @@ function disapendArray(myArray){
 
     function showAllTownReg() {
         finalRegField.innerHTML = "";
-        var objectTown = Object.keys(instRegistration.regNoAdded())
-        console.log()
+        var objectTown = Object.keys(instRegistration.regNoAdded());
         if (objectTown.length != 0) {
             disapendObject(instRegistration.regNoAdded());
 
