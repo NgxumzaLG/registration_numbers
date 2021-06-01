@@ -86,7 +86,7 @@ body {
     margin: 5px 0 10px 0;
 }
 
-.addRegBtn, .showBtn, .showAllBtn {
+.addRegBtn, .showBtn, .showAllBtn, .resetBtn, .unitTestingBtn{
     width: auto;
     height: auto;
     padding: 5px;
@@ -98,7 +98,7 @@ body {
     background-color: transparent;
 }
 
-.addRegBtn:hover, .showBtn:hover, .showAllBtn:hover {
+.addRegBtn:hover, .showBtn:hover, .showAllBtn:hover, .resetBtn:hover, .unitTestingBtn:hover {
     transform: scale(1.1);
 }
 

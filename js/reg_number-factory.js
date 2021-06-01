@@ -1,21 +1,27 @@
 function regNumberFactory(regNoData) {
     var storeRegNo = regNoData || {};
     var checkedTown = [];
-    var message = ""
+    var message = "";
+    const regExp1 = /^((CA|CY|CJ|CL)\s([0-9]){6})$/;
+    const regExp2 = /^((CA|CY|CJ|CL)\s([0-9]){3}\s([0-9]){3})$/;
+    const regExp3 = /^((CA|CY|CJ|CL)\s([0-9]){3}\-([0-9]){3})$/;
 
-    function addRegNo(regNumber) {
-        if (regNumber !== "") {
-            if (!storeRegNo[regNumber]) {
-                storeRegNo[regNumber] = 1;
-                message = "Registration number has been succcesfully added"
-                return true
-
-            } else {
-                storeRegNo[regNumber]++;
-                message = "Registration number already exists"
-                return false
-
-            }
+    function addRegNo(regNo) {
+        var regNumber = regNo.toUpperCase();
+        if (regNumber !== "") {      
+            if (regNumber.match(regExp1) || regNumber.match(regExp2) || regNumber.match(regExp3)) {
+                if (!storeRegNo[regNumber]) {
+                    storeRegNo[regNumber] = 1;
+                    message = "Registration number has been succcesfully added"
+                    return true
+    
+                } else {
+                    storeRegNo[regNumber]++;
+                    message = "Registration number already exists"
+                    return false
+    
+                }
+            }  
         }
     }
 
